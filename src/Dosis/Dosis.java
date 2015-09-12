@@ -2,6 +2,8 @@ package Dosis;
 import java.util.ArrayList;
 import java.util.List;
 
+import Parser.ParserAnmat;
+
 
 public class Dosis extends GrammarElement{
 
@@ -77,7 +79,8 @@ public class Dosis extends GrammarElement{
 		descriptores.add(fraseNombre);
 		
 		Cantidad aa = (Cantidad) GrammarTool.getMatchingElement( Dosis.modelosCantidad , aux );
-		System.out.println(aa.getClass());	
+		if (ParserAnmat.debugTypes)
+			System.out.println(aa.getClass());	
 		descriptores.addAll(aa.getDescriptors(aux, cantidadPresentacion, magnitudPresentacion,unidades));
 		
 		return descriptores;

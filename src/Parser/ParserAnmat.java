@@ -39,7 +39,7 @@ public class ParserAnmat {
 	public static CantidadSimple cantSimple = new CantidadSimple(); 
 	public static List<String> listaUnidades;
 	
-	public static boolean debugTypes=true;
+	public static boolean debugTypes=false;
 	
 	public static Hashtable<String,String> listaNombresExpresionesEspecialesEnDrogas, listaNombresExpresionesEspecialesEnPresentaciones = new Hashtable<String, String>(), listaNombresExpresionesEspecialesEnMagnitudes;
 	public static int aciertos=0, fallos =0,count=0;
@@ -141,7 +141,8 @@ public class ParserAnmat {
 					int cantidadUnidades=0;
 					if (presentation!=null)
 					{
-						System.out.println(presentation.getClass());
+						if (debugTypes)
+							System.out.println(presentation.getClass());
 						List<Object> prov = presentation.getDescriptoresPresentacion(buildPresentation(pres));
 						dosisPresentacion=(Double) Double.valueOf(prov.get(0).toString());
 						magnitudPresentacion = (String) prov.get(1);
@@ -177,7 +178,7 @@ public class ParserAnmat {
 							if (magnitudDroga.equals("MILLONES") || magnitudDroga.equals("MILL"))
 								magnitudDroga="MILL_GER";
 							
-							if (ParserAnmat.tablaSinConversion.contains(magnitudDroga))
+							if (ParserAnmat.tablaSinConversion.contains(magnitudDroga) && debugTypes)
 								System.out.println("SinConv");
 							
 							if (!magnitudDroga.equals("null"))
