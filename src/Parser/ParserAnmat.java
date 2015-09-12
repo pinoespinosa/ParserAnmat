@@ -1,5 +1,7 @@
 package Parser;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -46,14 +48,10 @@ public class ParserAnmat {
 	
 	public static void initTablasEquivalencias(){
 		
-		
 		// Cargo la lista de unidades
 		listaUnidades=SimpleFile.readFile("", "Unidades.conf");
 		listaNombresExpresionesEspecialesEnDrogas = SimpleFile.readHashTableFile("", "NombresExpresionesEspecialesEnDrogas.conf");
 		listaNombresExpresionesEspecialesEnPresentaciones = SimpleFile.readHashTableFile("", "NombresExpresionesEspecialesEnPresentaciones.conf");
-		
-	
-		
 		
 		// Inicializa la hash ToGramos
 		tablaEquivalenciasToGramos.setDefault(((double) -1.0));
@@ -64,6 +62,7 @@ public class ParserAnmat {
 		tablaEquivalenciasToGramos.put("GRAMOS", ((double) 1.0));
 		tablaEquivalenciasToGramos.put("null", ((double) 0.0));
 		tablaEquivalenciasToGramos.put("MCG", ((double) 0.000001));
+		tablaEquivalenciasToGramos.put("UG", ((double) 0.000001));
 		
 		// Inicializa la hash ToMililitros
 		tablaEquivalenciasToMililitros.setDefault(((double) -1.0));
@@ -101,16 +100,17 @@ public class ParserAnmat {
 		modelosPresentaciones.add(new PresentacionCantidadXUnidad());
 		modelosPresentaciones.add(new PresentacionUnidadesXCantidad());
 		modelosPresentaciones.add(new PresentacionCantidadAndTexto());
-
-
-		
-
 		
 	}
 	
 	
 	public static String Parsing( List<String> archivo){
 	
+		DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
+		decimalFormatSymbols.setDecimalSeparator('.');
+		DecimalFormat decimalFormat = new DecimalFormat("#0.0000000000", decimalFormatSymbols);
+		
+		
 		float a=0,b=0;
 		
 		String nroCertif, nombreMed, FormaFarm;
@@ -184,7 +184,7 @@ public class ParserAnmat {
 							if (!magnitudDroga.equals("null"))
 							{
 								aciertos++;
-								System.out.println(nroCertif + "	" + posicionCertificado + "	-1	" + nombreMed + "	" + FormaFarm+"	"+ dosisPresentacion +"	"+ magnitudPresentacion +"	"+ cantidadUnidades+ "	" + nombreDroga +"	"+ String.format("%.12f", cantidadDroga) +"	"+ magnitudDroga+"	"+ ToolBox.substring(pres, 250) + "	" + droga );
+								System.out.println(nroCertif + "	" + posicionCertificado + "	-1	" + nombreMed + "	" + FormaFarm+"	"+ dosisPresentacion +"	"+ magnitudPresentacion +"	"+ cantidadUnidades+ "	" + nombreDroga +"	"+ decimalFormat.format(cantidadDroga) +"	"+ magnitudDroga+"	"+ ToolBox.substring(pres, 250) + "	" + droga );
 								
 							}
 							else
