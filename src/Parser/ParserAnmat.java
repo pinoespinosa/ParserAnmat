@@ -209,7 +209,7 @@ public class ParserAnmat {
 					//		a= aciertos;
 					//		b =(aciertos+fallos);
 					//		System.out.print(a/b) ;
-							System.out.println(" --> " + aciertos + "_SI " + fallos + "_NO " + b);
+		//					System.out.println(" --> " + aciertos + "_SI " + fallos + "_NO " + b);
 						}
 						
 					}
