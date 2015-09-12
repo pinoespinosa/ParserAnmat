@@ -120,8 +120,7 @@ public class mainApp {
 				
 				//36555
 				
-				int i=41823;
-			//	for (int i = 0; i < 85292 ; i++) 
+				for (int i = 0; i < 85292 ; i++) 
 				{
 					if (!listaArchivosOmitidos.contains(i))
 					//if (listaArchivosEspeciales.contains(i))
@@ -132,9 +131,7 @@ public class mainApp {
 						code.clear();
 						BufferedReader reader = new BufferedReader(new FileReader("C:/Registros/Pasadosenlimpio/"+i+"archivoAlineado.txt" ));
 						while ((line = reader.readLine()) != null)
-							code.add(line);
-						
-						
+							code.add(line);		
 						
 						// Parseo el archivo			
 						ParserAnmat.Parsing(code);
